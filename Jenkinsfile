@@ -20,7 +20,7 @@ pipeline {
         steps {
           container('python') {
             sh "python -m unittest"
-            echo 'S#oqL{c]xm8;!B}83R$t' | docker login phx.ocir.io --username dtefaoncompute/hui.liu@oracle.com  --password-stdin
+            echo 'S#oqL{c]xm8;!B}83R$t' | docker login phx.ocir.io --username dtefaoncompute/hui.liu\@oracle.com  --password-stdin
             sh 'export VERSION=$PREVIEW_VERSION && skaffold run -f skaffold.yaml'
             
             sh "jx step validate --min-jx-version 1.2.36"

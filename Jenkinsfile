@@ -57,7 +57,7 @@ pipeline {
           }
           container('python') {
             sh "python -m unittest"
-            docker login phx.ocir.io -u=dtefaoncompute/test -p="4W9Epq1HBK-di<2AWk1r"
+            sh -c "docker login phx.ocir.io -u=dtefaoncompute/test -p=4W9Epq1HBK-di\<2AWk1r"
             sh 'export VERSION=`cat VERSION` && skaffold run -f skaffold.yaml'
             sh "jx step validate --min-jx-version 1.2.36"
             sh "jx step post build --image phx.ocir.io/dtefaoncompute/$ORG/$APP_NAME:\$(cat VERSION)"

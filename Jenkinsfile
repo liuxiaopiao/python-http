@@ -20,7 +20,7 @@ pipeline {
         steps {
           container('python') {
             sh "python -m unittest"
-            echo '4W9Epq1HBK-di<2AWk1r' | docker login phx.ocir.io --username dtefaoncompute/test --password-stdin
+            docker login phx.ocir.io --username dtefaoncompute/test --password 4W9Epq1HBK-di\<2AWk1r
             sh 'export VERSION=$PREVIEW_VERSION && skaffold run -f skaffold.yaml'
             
             sh "jx step validate --min-jx-version 1.2.36"

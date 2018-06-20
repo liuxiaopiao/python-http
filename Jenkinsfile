@@ -5,6 +5,7 @@ pipeline {
     environment {
       ORG               = 'liuxiaopiao'
       APP_NAME          = 'python-http'
+      DOCKER_SECERET    = '4W9Epq1HBK-di<2AWk1r'
       CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
     }
     stages {
@@ -20,7 +21,7 @@ pipeline {
         steps {
           container('python') {
             sh "python -m unittest"
-            docker login phx.ocir.io --username dtefaoncompute/test --password 4W9Epq1HBK-di\<2AWk1r
+            sh "docker login phx.ocir.io -u=dtefaoncompute/test -p=${env.DOCKER_SECERET}"
             sh 'export VERSION=$PREVIEW_VERSION && skaffold run -f skaffold.yaml'
             
             sh "jx step validate --min-jx-version 1.2.36"
